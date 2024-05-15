@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Título de la página{% endblock %}</title>
+  <!-- Tailwind CSS -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="shortcut icon" href="{% static 'images/logo1.png' %}" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" />
+
+</head>
+
+<body class="bg-gray-100 font-sans">
+  <!-- Navbar -->
+  <nav class="bg-gray-800 h-24 fixed w-full">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <!-- Mobile menu button-->
+          <button type="button"
+            class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            aria-controls="mobile-menu" aria-expanded="false">
+            <span class="absolute -inset-0.5"></span>
+            <span class="sr-only">Open main menu</span>
+            <!--
+            Icon when menu is closed.
+
+            Menu open: "hidden", Menu closed: "block"
+          -->
+            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+              aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+            <!--
+            Icon when menu is open.
+
+            Menu open: "block", Menu closed: "hidden"
+          -->
+            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+              aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="flex flex-shrink-0 items-center  pt-3">
+            <img class=" " src="{% static 'images/logo.png'%}" width="200" alt="Your Company">
+          </div>
+          <div class="hidden sm:ml-6 sm:block">
+            <div class="flex space-x-4 pt-11">
+              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+              <a href="{% url 'inicio' %}"
+                class=" text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Inicio</a>
+              <a href="{% url 'denuncias' %}"
+                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Denuncias</a>
+              <a href="{% url 'contacto' %}"
+                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contactos</a>
+              <a href="{% url 'sobre' %}"
+                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Sobre
+                nosotros</a>
+            </div>
+          </div>
+        </div>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+
+          <!-- Profile dropdown -->
+          <div class="relative ml-3">
+            <div class="pt-6 flex">
+              <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div class="sm:hidden" id="mobile-menu">
+      <div class="space-y-1 px-2 pb-3 pt-2">
+        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        <a href="{% url 'inicio' %}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
+          aria-current="page">Inicio</a>
+        <a href="{% url 'denuncias' %}"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Denuncias</a>
+        <a href="{% url 'contacto' %}"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Contactos</a>
+        <a href="{% url 'sobre' %}"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Sobre
+          nosotros</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Contenido Principal -->
+  <span class="absolute text-white text-4xl top-5 left-4 cursor-pointer" onclick="openSidebar()">
+    <i class="bi bi-filter-left px-2 bg-gray-900 rounded-md"></i>
+  </span>
+  <div class="sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] shadow-md overflow-y-auto text-center bg-gray-900">
+    <div class="text-gray-100 text-xl">
+      <div class="p-2.5 mt-1 flex items-center">
+        <img class=" " src="{% static 'images/logo.png'%}" width="200" alt="Your Company">
+      </div>
+      <div class="my-2 bg-gray-600 h-[1px]"></div>
+    </div>
+    <div class="p-2.5 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-gray-700 text-white">
+      <i class="bi bi-search text-sm"></i>
+      <input type="text" placeholder="Buscar" class="text-[15px] ml-4 w-full bg-transparent focus:outline-none" />
+    </div>
+    <a href="{% url 'dashboard' %}" class="{% if request.path == '/dashboard' %}bg-blue-600{% endif %} p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer  hover:bg-blue-600 text-white">
+      <i class="bi bi-house-door-fill"></i>
+      <span class="text-[15px] ml-4 text-gray-200 ">Dashboard</span>
+    </a>
+    <a href="{% url 'misdenuncias' %}" class="{% if request.path == '/misdenuncias' %}bg-blue-600{% endif %} p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+      <i class="bi bi-bookmark-fill"></i>
+      <span class="text-[15px] ml-4 text-gray-200 ">Mis denuncias</span>
+    </a>
+    <div class="my-4 bg-gray-600 h-[1px]"></div>
+
+    <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 " id="submenu">
+      <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+        Social
+      </h1>
+      <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+        Personal
+      </h1>
+      <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+        Friends
+      </h1>
+    </div>
+    <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+      <i class="bi bi-box-arrow-in-right"></i>
+      <span class="text-[15px] ml-4 text-gray-200 ">Cerrar sesion</span>
+    </div>
+  </div>
+
+  <div class="container  pt-32">
+    <div class="grid grid-cols-4">
+      <div class="col-span-1"></div>
+      <div class="col-span-3">
+        <div class="bg-white p-4 rounded-lg shadow-md mb-4">
+          {% block content %}
+          {% endblock %}
+          
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+    function dropdown() {
+      document.querySelector("#submenu").classList.toggle("hidden");
+      document.querySelector("#arrow").classList.toggle("rotate-0");
+    }
+    dropdown();
+
+    function openSidebar() {
+      document.querySelector(".sidebar").classList.toggle("hidden");
+    }
+  </script>
+
+
+
+  <!-- Tailwind CSS y JavaScript (opcional) -->
+</body>
+
+</html>

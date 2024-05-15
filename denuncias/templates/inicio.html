@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio - Vigilante digital{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-4 gap-8">
+    <!-- Panel izquierdo -->
+    <div class="col-span-1 ">
+    </div>
+
+    <div class="col-span-1 bg-gray-100 p-4 w-80 fixed rounded-lg">
+        <!-- Contenido del panel izquierdo -->
+        <aside class="aside-left bg-gray-100 p-4 rounded-lg  w-full">
+            <h2 class="text-lg font-semibold mb-4">Categorías</h2>
+            <ul class="space-y-2">
+                <li>
+                    <a href="#"
+                        class="block border-dark border-b-2 hover:bg-gray-200 transition duration-100 p-3  ">
+                        Política
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="block  border-dark border-b-2 hover:bg-gray-200 transition duration-100 p-3">
+                        Economía
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="block  border-dark border-b-2 hover:bg-gray-200 transition duration-100 p-3">
+                        Deportes
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="block  border-dark border-b-2 hover:bg-gray-200 transition duration-100 p-3">
+                        Entretenimiento
+                    </a>
+                </li>
+                <!-- Agrega más categorías según sea necesario -->
+            </ul>
+        </aside>
+    </div>
+    <!-- Feed principal -->
+
+
+    <div class="col-span-2">
+        <div class="bg-white p-4 rounded-lg shadow-md mb-4">
+            <p class="text-lg font-semibold mb-4">¡Mantente informado con las últimas noticias sobre Cartagena y las
+                denuncias de la comunidad!</p>
+        </div>
+
+        <!-- Mostrar la paginación -->
+
+
+
+        <!-- Noticias -->
+        <div class="bg-white p-4 rounded-lg shadow-md mb-4">
+            <h2 class="text-lg font-semibold mb-4">Últimas Noticias</h2>
+            <ul class="divide-y divide-gray-200">
+                {% for noticia in noticias %}
+                <li class="py-4 noticias">
+                    <a href="{{ noticia.url }}"
+                        class="block hover:bg-gray-50 rounded-lg px-4 py-2 transition duration-300">
+                        <div class="flex items-center">
+                            <img src="{{ noticia.urlToImage }}" alt="{{ noticia.title }}"
+                                class="w-16 h-16 object-cover rounded-lg mr-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-blue-600 hover:text-blue-400">{{ noticia.title }}                            </h3>
+                                <b>{{ noticia.author }}</b> - {{ noticia.publishedAt }} <br>
+                                <p class="text-gray-600">{{ noticia.description }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+    <!-- Panel derecho -->
+    <div class="col-span-1 bg-gray-100 fixed right-0 w-80 p-4 rounded-lg">
+        <!-- Contenido del panel derecho -->
+        <h2 class="text-lg font-semibold mb-4">Denuncias Destacadas</h2>
+        <div class="mb-4">
+            <p class="text-sm text-gray-600">Denuncia Destacada 1: Fraude en Contratación Pública</p>
+        </div>
+        <div class="mb-4">
+            <p class="text-sm text-gray-600">Denuncia Destacada 2: Maltrato Animal en el Centro de la Ciudad</p>
+        </div>
+        <!-- Agrega más denuncias destacadas aquí -->
+    </div>
+</div>
+{% endblock %}
